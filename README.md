@@ -58,6 +58,30 @@ end
 
 See `MultiSessions::Config` for more information.
 
+Also you may want to change class for imitating object `MultiSessions::Current` in Rails console:
+
+```ruby
+if Rails.env.development?
+  ActiveSupport::Reloader.to_prepare do
+    # Here "User" is your model class (e.g. derived from ActiveRecord::Base) and "admin?" is
+    # redefined method in "User" class.
+    MultiSessions::MockCurrent.user_model_class =
+      Class.new(User) do
+        def admin?
+          true
+        end
+      end
+  end
+end
+```
+
+You may use it like so:
+
+```ruby
+MultiSessions::MockCurrent.new
+MultiSessions::MockCurrent.new(User.new(your_attributes))
+```
+
 Also, you may be interested in adding configuration to `Rack::Cors`, see example for `config/initializers/cors.rb`:
 
 ```ruby

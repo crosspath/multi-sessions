@@ -8,6 +8,7 @@ module MultiSessions
   autoload :Config, "multi_sessions/config"
   autoload :ControllerMethods, "multi_sessions/controller_methods"
   autoload :Current, "multi_sessions/current"
+  autoload :MockCurrent, "multi_sessions/mock_current"
   autoload :VERSION, "multi_sessions/version"
 
   class << self
